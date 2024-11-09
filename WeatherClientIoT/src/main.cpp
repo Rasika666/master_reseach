@@ -12,7 +12,9 @@ const char *ssid = "rasiphone";
 const char *password = "playwithheart";
 
 // Server endpoint
-const char *serverUrl = "http://yourserver.com/api/weather";
+// This will change
+const String baseUrl = "http://172.20.10.3:8000/api/v0";
+WiFiClient client;
 
 void setup()
 {
@@ -39,33 +41,35 @@ void loop()
 
   Location deviceLocation("123 Main St", "40.712776", "-74.005974");
   WeatherRequest request("2024-11-01T13:45:00", deviceLocation);
-  String  jsonPayload = request.toJson();
+  String jsonPayload = request.toJson();
   Serial.println("JSON Payload:");
   Serial.println(jsonPayload);
 
-  // if (WiFi.status() == WL_CONNECTED)
-  // {
-  //   HTTPClient http;
-  //   http.begin(serverUrl);
-  //   http.addHeader("Content-Type", "application/json");
+  if (WiFi.status() == WL_CONNECTED)
+  {
+    HTTPClient http;
 
-  //   int httpResponseCode = http.POST(jsonPayload);
+    // call random number end point
+    http.begin(client, baseUrl + "/random-generated-number");
+    http.addHeader("Content-Type", "application/json");
 
-  //   if (httpResponseCode > 0)
-  //   {
-  //     String response = http.getString();
-  //     Serial.println("Response:");
-  //     Serial.println(response);
-  //   }
-  //   else
-  //   {
-  //     Serial.print("Error code: ");
-  //     Serial.println(httpResponseCode);
-  //   }
-  //   http.end();
-  // }
-  // else
-  // {
-  //   Serial.println("WiFi not connected");
-  // }
+    int httpResponseCode = http.GET();
+
+    if (httpResponseCode > 0)
+    {
+      String response = http.getString();
+      Serial.println("Response:");
+      Serial.println(response);
+    }
+    else
+    {
+      Serial.print("Error code: ");
+      Serial.println(httpResponseCode);
+    }
+    http.end();
+  }
+  else
+  {
+    Serial.println("WiFi not connected");
+  }
 }
