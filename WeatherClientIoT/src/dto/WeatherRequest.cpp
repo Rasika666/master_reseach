@@ -3,7 +3,7 @@
 #include <ArduinoJson.h>
 #include <Arduino.h>
 
-WeatherRequest::WeatherRequest(const std::string &timeStamp, Location location)
+WeatherRequest::WeatherRequest(String timeStamp, Location location)
     : timeStamp(timeStamp), location(location) {};
 
 String WeatherRequest::toJson()

@@ -1,17 +1,17 @@
 #ifndef Location_H
 #define Location_H
 
-#include <string>
+#include <Arduino.h>
 
 class Location
 {
 public:
-  std::string address;
-  std::string latitude;
-  std::string longitude;
+  String address;
+  String latitude;
+  String longitude;
 
   Location() {}
-  Location(const std::string &address, const std::string &latitude, const std::string &longitude)
+  Location(String address, String latitude, String longitude)
       : address(address), latitude(latitude), longitude(longitude) {}
 };
 
