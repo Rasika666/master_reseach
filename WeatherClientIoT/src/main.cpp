@@ -2,6 +2,9 @@
 #include <Arduino.h>
 #include <ESP8266HTTPClient.h>
 #include <WiFiClient.h>
+#include <NTPClient.h>        
+#include <WiFiUdp.h>        
+#include <TimeLib.h> 
 #include "./dto/Location.h"
 #include "./dto/WeatherRequest.h"
 
@@ -15,6 +18,8 @@ const char *password = "playwithheart";
 // This will change
 const String baseUrl = "http://172.20.10.3:8000/api/v0";
 WiFiClient client;
+WiFiUDP udp;                
+NTPClient timeClient(udp, "pool.ntp.org", 0, 3600000);
 
 void setup()
 {
@@ -33,28 +38,51 @@ void setup()
   }
   Serial.println("Connected to WiFi!");
   randomSeed(analogRead(0));
+  timeClient.begin();
+  timeClient.update();
 }
 
-String createFloatRandNumber(int min, int max)
+void exitFromMain(String err)
 {
-  double randomInRange = min + (random(0, 10000) / 10000.0) * (max - min);
-  Serial.println("randon number generated [min=" + String(min) + ", max=" + String(max) + " ] => " + String(randomInRange));
-  return String(randomInRange);
+  int i = 0;
+  while (true)
+  {
+    if (i == 5)
+      ESP.restart();
+    Serial.print(err);
+    delay(1000);
+    i++;
+  };
 };
 
-void loop()
-{
+String dateTimeNow() {
+  timeClient.update();
+  unsigned long currentEpoch = timeClient.getEpochTime();
+  setTime(currentEpoch);
+  String timestamp = String(year()) + "-" + String(month()) + "-" + String(day()) + "T" +
+                     String(hour()) + ":" + String(minute()) + ":" + String(second());
+  Serial.println("Date and Time is: " + timestamp);
+  return timestamp;
+};
 
-  Location deviceLocation("123 Main St", createFloatRandNumber(6, 8), createFloatRandNumber(79, 81));
-  WeatherRequest request("2024-11-01T13:45:00", deviceLocation);
+String randWeatherRequest()
+{
+  Location deviceLocation("234/c, Gampaha, Sri Lanka", "7.1000", "80.2167");
+  WeatherRequest request(dateTimeNow(), deviceLocation);
   String jsonPayload = request.toJson();
   Serial.println("JSON Payload:");
   Serial.println(jsonPayload);
+  return jsonPayload;
+};
 
+
+
+void loop()
+{
   if (WiFi.status() == WL_CONNECTED)
   {
     HTTPClient http;
-    // call random number end point
+    
     http.begin(client, baseUrl + "/random-generated-number");
     http.addHeader("Content-Type", "application/json");
     int httpRes_rgn = http.GET();
@@ -64,36 +92,42 @@ void loop()
       Serial.println("Response from the /random-generated-number");
       Serial.println(response);
     }
-    else if (httpRes_rgn == -1)
-    {
-      Serial.print("Server not responding");
-      return;
-    }
     else
     {
-      Serial.print("Error code: " + httpRes_rgn);
+      exitFromMain("Error in /random-generated-number");
     }
     http.end();
     delay(500);
 
-    // call Weather end point
+   
     http.begin(client, baseUrl + "/weather-info");
     http.addHeader("Content-Type", "application/json");
-    int httpRes_weather = http.POST(jsonPayload);
+    int httpRes_weather = http.POST(randWeatherRequest());
     if (httpRes_weather > 0)
     {
       String response = http.getString();
       Serial.println("Response from the /weather-info");
       Serial.println(response);
     }
-    else if (httpRes_rgn == -1)
+    else
     {
-      Serial.print("Server not responding");
-      return;
+      exitFromMain("Error in /weather-info");
+    }
+    http.end();
+
+  
+    http.begin(client, baseUrl + "/subscribers");
+    http.addHeader("Content-Type", "application/json");
+    int httpRes_subscribers= http.GET();
+    if (httpRes_subscribers > 0)
+    {
+      String response = http.getString();
+      Serial.println("Response from the /subscribers");
+      Serial.println(response);
     }
     else
     {
-      Serial.print("Error code: " + httpRes_weather);
+      exitFromMain("Error in /weather-info");
     }
     http.end();
   }
