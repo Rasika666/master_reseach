@@ -10,7 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 public class WeatherRequest {
     @Nonnull
-    private LocalDateTime timeStamp;
+    private String timeStamp;
 
     private Location location;
 
@@ -78,7 +78,7 @@ public class WeatherRequest {
         @Data
         @NoArgsConstructor
         public static class EventLog {
-            private LocalDateTime timestamp;
+            private String timestamp;
             private String event;
         }
     }

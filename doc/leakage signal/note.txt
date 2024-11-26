@@ -1,0 +1,31 @@
+2024/11/26
+-----------
+https://www.make-it.ca/nodemcu-details-specifications/
+
+
+1. 80 MHz 
+- no significant change
+2. 160 MHz
+- no significant change
+3. 240 MHz
+- no significant change
+4. 320 MHz
+- no significant change
+5. 400 MHz
+- showed significant change of 400 MHz and 398 MHz
+- 400 MHz more details compared to the 398 MHz
+- placed in corner of the chip
+6. 480 MHz
+- showed significant change in the 480 MHz and 478 MHz
+- 480 MHz more details compare to the 478 MHz
+- strength signal comes when placed center of the chip
+7. 560 MHz
+- no significant change
+8. 640 MHz
+- no significant change
+9. 720 MHz
+- no significant change
+10. 800 MHz
+- no significant change
+
+
