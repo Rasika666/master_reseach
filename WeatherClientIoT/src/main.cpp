@@ -114,7 +114,7 @@ void loop()
       exitFromMain("Error in /weather-info");
     }
     http.end();
-
+    delay(500);
   
     http.begin(client, baseUrl + "/subscribers");
     http.addHeader("Content-Type", "application/json");
@@ -130,6 +130,7 @@ void loop()
       exitFromMain("Error in /weather-info");
     }
     http.end();
+    delay(500);
   }
   else
   {

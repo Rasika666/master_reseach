@@ -3,6 +3,8 @@
 https://www.make-it.ca/nodemcu-details-specifications/
 
 
+RF gain 8DB
+sample rate 2.4MHz
 1. 80 MHz 
 - no significant change
 2. 160 MHz
@@ -27,5 +29,14 @@ https://www.make-it.ca/nodemcu-details-specifications/
 - no significant change
 10. 800 MHz
 - no significant change
+
+sample rate 20 MHz
+RF gain 14
+390
+364
+
+
+
+
 
 
