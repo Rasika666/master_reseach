@@ -112,7 +112,7 @@ void deserializeSubscribers(const String &response, std::vector<String> &subscri
 
 void createWeatherResponse(const String &response, WeatherResponse &weatherResponse)
 {
-	StaticJsonDocument<1024> doc;
+	JsonDocument doc;
 	DeserializationError error = deserializeJson(doc, response);
 	if (error)
 	{
@@ -156,6 +156,22 @@ void loop()
 		WeatherResponse weatherResponse;
 
 		HTTPClient http;
+
+		// unauthorize ping API call
+		http.begin(client, baseUrl + "/ping");
+		http.addHeader("Content-Type", "application/json");
+		int httpRes_ping = http.GET();
+		if (httpRes_ping > 0)
+		{
+			String response = http.getString();
+			Serial.println("Response from the /ping");
+			Serial.println(response);
+		}
+		else
+		{
+			exitFromMain("Error in /ping");
+		}
+		http.end();
 
 		http.begin(client, baseUrl + "/random-generated-number");
 		http.addHeader("Content-Type", "application/json");

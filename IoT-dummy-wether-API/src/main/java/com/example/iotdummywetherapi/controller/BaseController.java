@@ -48,9 +48,9 @@ public class BaseController {
     }
 
     @GetMapping("/ping")
-    public ResponseEntity<Void> ping() {
+    public String ping() {
         LOGGER.info("Ping endpoint was called");
-        return ResponseEntity.noContent().build();
+        return "pong";
     }
 
     @GetMapping("/subscribers")
