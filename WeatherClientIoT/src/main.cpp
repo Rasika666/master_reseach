@@ -97,9 +97,7 @@ void loop()
       exitFromMain("Error in /random-generated-number");
     }
     http.end();
-    delay(500);
-
-   
+    
     http.begin(client, baseUrl + "/weather-info");
     http.addHeader("Content-Type", "application/json");
     int httpRes_weather = http.POST(randWeatherRequest());
@@ -114,7 +112,6 @@ void loop()
       exitFromMain("Error in /weather-info");
     }
     http.end();
-    delay(500);
   
     http.begin(client, baseUrl + "/subscribers");
     http.addHeader("Content-Type", "application/json");
@@ -130,12 +127,10 @@ void loop()
       exitFromMain("Error in /weather-info");
     }
     http.end();
-    delay(500);
   }
   else
   {
     Serial.println("WiFi not connected");
   }
 
-  delay(2000);
 }
