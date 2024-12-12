@@ -61,9 +61,9 @@ public class BaseController {
     }
 
     @PostMapping("/notification")
-    public ResponseEntity<Void> notification(@RequestBody Notification notification) {
+    public ResponseEntity<String> notification(@RequestBody Notification notification) {
         LOGGER.info("Notification is received [{}]", notification);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body("notification received");
     }
 
     @PutMapping("/log")
