@@ -34,3 +34,7 @@ build/
 
 ### env ###
 .venv
+IoT-dummy-wether-API/IoT.log
+IoT-dummy-wether-API/IoT
+IoT-dummy-wether-API/C:/logs/myapp/spring.log
+IoT-dummy-wether-API/C:/logs/myapp/spring.log
