@@ -87,6 +87,8 @@ public class WeatherRequest {
     @NoArgsConstructor
     public static class SystemSettings {
         private AdminUser admin_user;
+        @Data
+        @NoArgsConstructor
         public static class AdminUser {
             private String username;
             private String password;
@@ -113,6 +115,8 @@ public class WeatherRequest {
     @NoArgsConstructor
     public static class Control {
         private List<ActiveCommand> active_commands;
+        @Data
+        @NoArgsConstructor
         public static class ActiveCommand {
             private String command;
             private String status;

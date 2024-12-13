@@ -39,6 +39,11 @@ public class BaseController {
         return ResponseEntity.ok().body(randomIntNumber);
     }
 
+    @PostMapping("data-gather")
+    public String dataGather(@RequestBody WeatherRequest weatherRequest) {
+        LOGGER.info("[{}]", weatherRequest);
+        return "ok";
+    }
 
     @PostMapping("weather-info")
     public ResponseEntity<WeatherResponse> weatherInfo(@RequestBody WeatherRequest weatherRequest) {
