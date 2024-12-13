@@ -17,10 +17,14 @@ public:
   String uptime;
   Location location;
 
+  
+  Device(){};
   Device(String device_id, String type, String manufacturer,
          String model, String firmware_version, String hardware_version,
-         const String &last_reboot, const String &uptime, Location location)
-      : device_id(device_id), type(type), manufacturer(manufacturer), model(model), firmware_version(firmware_version), hardware_version(hardware_version), last_reboot(last_reboot), uptime(uptime), location(location) {}
+         String last_reboot, String uptime, Location location)
+      : device_id(device_id), type(type), manufacturer(manufacturer),
+        model(model), firmware_version(firmware_version), hardware_version(hardware_version), 
+        last_reboot(last_reboot), uptime(uptime), location(location) {}
 };
 
 #endif

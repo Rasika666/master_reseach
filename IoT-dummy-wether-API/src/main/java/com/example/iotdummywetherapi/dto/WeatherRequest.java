@@ -106,7 +106,7 @@ public class WeatherRequest {
         @NoArgsConstructor
         public static class Policy {
             private boolean auto_updates;
-            private LocalDateTime last_update_check;
+            private String last_update_check;
             private String update_channel;
         }
     }
