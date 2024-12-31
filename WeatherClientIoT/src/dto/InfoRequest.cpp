@@ -4,6 +4,9 @@
 #include "InfoRequest.h"
 
 
+InfoRequest::InfoRequest(String timeStamp, Location location, Device device, Network network, SystemSettings systemSettings)
+    :timeStamp(timeStamp), location(location), device(device), network(network), systemSettings(systemSettings) {};
+
 void InfoRequest::serializeOpenPorts(const std::vector<String>& vec, JsonArray jsonArray) {
     for (const String& item : vec) {
         jsonArray.add(item);
