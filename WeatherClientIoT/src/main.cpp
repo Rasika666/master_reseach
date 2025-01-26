@@ -13,6 +13,7 @@
 #include "./dto/WeatherResponse.h"
 #include "./dto/InfoRequest.h"
 #include "./dto/Device.h"
+#include "./dto/Control.h"
 
 // WiFi credentials
 const char *ssid = "SLT-LTE-WiFi";
@@ -103,7 +104,15 @@ String createInfoRequest()
 	Policy policy(true, "2024-12-28 10:45:00", "ch1");
 	SystemSettings systemSetting(adminUser, security, policy);
 
-	InfoRequest inforReq(dateTimeNow(), deviceLocation, device, network, systemSetting);
+	ActiveCommand ac1("start", "success", "2024-08-10 10:1000");
+	ActiveCommand ac2("stop", "failed", "2024-08-10 10:1000");
+
+	std::vector<ActiveCommand> activeCommands;
+	activeCommands.push_back(ac1);
+	activeCommands.push_back(ac2);
+	Control control(activeCommands);
+
+	InfoRequest inforReq(dateTimeNow(), deviceLocation, device, network, systemSetting, control);
 
 	String jsonPayload = inforReq.toJson();
 	Serial.println("create info request:");
@@ -182,7 +191,7 @@ void loop()
 {
 	if (WiFi.status() == WL_CONNECTED)
 	{
-		String weatherInfo = randWeatherRequest();
+		String weatherInfo = createInfoRequest();
 		std::vector<String> subscribers;
 		WeatherResponse weatherResponse;
 

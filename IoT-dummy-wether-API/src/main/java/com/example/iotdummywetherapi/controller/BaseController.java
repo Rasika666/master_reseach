@@ -5,6 +5,8 @@ import com.example.iotdummywetherapi.dto.Notification;
 import com.example.iotdummywetherapi.dto.WeatherRequest;
 import com.example.iotdummywetherapi.dto.WeatherResponse;
 import com.example.iotdummywetherapi.util.RandomWeatherResponseGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -26,10 +28,12 @@ public class BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BaseController.class);
     private static final String UPLOAD_DIR = "/tmp/upload";
+    private final ObjectMapper objectMapper;
     private final ApplicationConfig config;
 
     public BaseController(ApplicationConfig applicationConfig) {
         this.config = applicationConfig;
+        objectMapper = new ObjectMapper();
     }
 
     @GetMapping("random-generated-number")
@@ -47,9 +51,16 @@ public class BaseController {
 
     @PostMapping("weather-info")
     public ResponseEntity<WeatherResponse> weatherInfo(@RequestBody WeatherRequest weatherRequest) {
-        WeatherResponse response = new RandomWeatherResponseGenerator(config).execute();
-        LOGGER.info("Generated weather response: [{}]", response);
-        return ResponseEntity.ok().body(response);
+        try {
+            String prettyWeatherRequest = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(weatherRequest);
+            WeatherResponse response = new RandomWeatherResponseGenerator(config).execute();
+            LOGGER.info("Weather info generated: [{}]", prettyWeatherRequest);
+            LOGGER.info("Generated weather response: [{}]", response);
+            return ResponseEntity.ok().body(response);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @GetMapping("/ping")

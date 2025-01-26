@@ -6,6 +6,7 @@
 #include "Network.h"
 #include "SystemSettings.h"
 #include "ActiveCommand.h"
+#include "Control.h"
 #include <Arduino.h>
 #include <ArduinoJson.h>
 
@@ -17,8 +18,9 @@ public:
     Device device;
     Network network;
     SystemSettings systemSettings;
+    Control control;
 
-    InfoRequest(String timeStamp, Location location, Device device, Network network, SystemSettings systemSettings);
+    InfoRequest(String timeStamp, Location location, Device device, Network network, SystemSettings systemSettings, Control control);
     String toJson();
 
 private:

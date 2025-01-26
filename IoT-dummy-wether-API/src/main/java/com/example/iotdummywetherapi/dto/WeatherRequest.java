@@ -120,7 +120,7 @@ public class WeatherRequest {
         public static class ActiveCommand {
             private String command;
             private String status;
-            private LocalDateTime timestamp;
+            private String timestamp;
         }
     }
 }
