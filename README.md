@@ -1,6 +1,5 @@
-© [Year] [Your Name/Company Name]
-
 # API detection through EM
+---
 
 ## Description
 This project is a prototype for demostrating the API calls from NodeMCU to Spring boot application
