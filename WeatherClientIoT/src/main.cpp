@@ -112,7 +112,7 @@ String createInfoRequest()
 	activeCommands.push_back(ac2);
 	Control control(activeCommands);
 
-	InfoRequest inforReq(dateTimeNow(), deviceLocation, device, network, systemSetting, control);
+	InfoRequest inforReq(dateTimeNow(), deviceLocation, device, network, systemSetting);
 
 	String jsonPayload = inforReq.toJson();
 	Serial.println("create info request:");

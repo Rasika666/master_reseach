@@ -110,17 +110,4 @@ public class WeatherRequest {
             private String update_channel;
         }
     }
-    private Control control;
-    @Data
-    @NoArgsConstructor
-    public static class Control {
-        private List<ActiveCommand> active_commands;
-        @Data
-        @NoArgsConstructor
-        public static class ActiveCommand {
-            private String command;
-            private String status;
-            private String timestamp;
-        }
-    }
 }

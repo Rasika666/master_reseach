@@ -18,9 +18,9 @@ public:
     Device device;
     Network network;
     SystemSettings systemSettings;
-    Control control;
+    // Control control;
 
-    InfoRequest(String timeStamp, Location location, Device device, Network network, SystemSettings systemSettings, Control control);
+    InfoRequest(String timeStamp, Location location, Device device, Network network, SystemSettings systemSettings);
     String toJson();
 
 private:

@@ -4,8 +4,8 @@
 #include "InfoRequest.h"
 
 
-InfoRequest::InfoRequest(String timeStamp, Location location, Device device, Network network, SystemSettings systemSettings, Control control)
-    :timeStamp(timeStamp), location(location), device(device), network(network), systemSettings(systemSettings), control(control) {};
+InfoRequest::InfoRequest(String timeStamp, Location location, Device device, Network network, SystemSettings systemSettings)
+    :timeStamp(timeStamp), location(location), device(device), network(network), systemSettings(systemSettings) {};
 
 void InfoRequest::serializeOpenPorts(const std::vector<String>& vec, JsonArray jsonArray) {
     for (const String& item : vec) {
@@ -85,10 +85,6 @@ String InfoRequest::toJson() {
     systemSettingsPolicy["auto_updates"] = systemSettings.policy.auto_updates;
     systemSettingsPolicy["last_update_check"] = systemSettings.policy.last_update_check;
     systemSettingsPolicy["update_channel"] = systemSettings.policy.update_channel;
-
-    JsonObject controlObj = doc["control"].to<JsonObject>();
-    JsonArray controlActiveCommand = controlObj["active_commands"].to<JsonArray>();
-    serializeActiveCommand(control.active_commands, controlActiveCommand);
 
 
     String output;
