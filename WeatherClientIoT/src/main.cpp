@@ -16,14 +16,14 @@
 #include "./dto/Control.h"
 
 // WiFi credentials
-const char *ssid = "SLT-LTE-WiFi";
-const char *password = "2JG78T5HRHQ";
-// const char *ssid = "rasiphone";
-// const char *password = "playwithheart";
+// const char *ssid = "SLT-LTE-WiFi";
+// const char *password = "2JG78T5HRHQ";
+const char *ssid = "rasiphone";
+const char *password = "playwithheart";
 
 // Server endpoint
 // This will change
-const String baseUrl = "http://192.168.1.6:8000/api/v0";
+const String baseUrl = "http://172.20.10.3:8000/api/v0";
 WiFiClient client;
 WiFiUDP udp;
 NTPClient timeClient(udp, "pool.ntp.org", 0, 3600000);

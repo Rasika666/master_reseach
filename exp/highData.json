@@ -1,0 +1,65 @@
+{
+    "timeStamp": "2025-1-26T15:32:5",
+    "location": {
+        "address": "234/c, Gampaha, Sri Lanka",
+        "latitude": "7.1000",
+        "longitude": "80.2167"
+    },
+    "device": {
+        "device_id": "Id0001",
+        "type": "IoT",
+        "manufacturer": "huawei",
+        "firmware_version": "v1.0.0",
+        "model": "fire_sensor",
+        "hardware_version": "hv_0022",
+        "last_reboot": "2024-08-10 10:1000",
+        "uptime": "13hr",
+        "location": {
+            "address": "234/c, Gampaha, Sri Lanka",
+            "latitude": "7.1000",
+            "longitude": "80.2167"
+        }
+    },
+    "network": {
+        "ip_address": "134.12.0.9",
+        "mac_address": "fe80::f1c7:548d:b29e:8cbc",
+        "ssid": "myWifi",
+        "signal_strength": "0.78",
+        "connected_devices": [
+            {
+                "device_id": "100",
+                "device_name": "sensor1",
+                "device_type": "tem_sensor",
+                "device_manufacturer": "huawei",
+                "ip_address": "192.168.0.1",
+                "mac_address": "e80::f1c7:548d:b29e:8ced"
+            },
+            {
+                "device_id": "101",
+                "device_name": "sensor2",
+                "device_type": "hum_sensor",
+                "device_manufacturer": "huawei",
+                "ip_address": "192.168.0.2",
+                "mac_address": "e80::f1c7:548d:b29e:8cef"
+            }
+        ]
+    },
+    "systemSettings": {
+        "admin_user": {
+            "username": "rasika",
+            "password": "test@123"
+        },
+        "security": {
+            "firewall_status": "Enabled",
+            "encryption": "AES",
+            "open_ports": [
+                "80"
+            ]
+        },
+        "policy": {
+            "auto_updates": true,
+            "last_update_check": "2024-12-28 10:45:00",
+            "update_channel": "ch1"
+        }
+    }
+}
