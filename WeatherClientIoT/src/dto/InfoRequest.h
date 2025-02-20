@@ -15,12 +15,9 @@ class InfoRequest
 public:
     String timeStamp;
     Location location;
-    Device device;
-    Network network;
     SystemSettings systemSettings;
-    Control control;
 
-    InfoRequest(String timeStamp, Location location, Device device, Network network, SystemSettings systemSettings, Control control);
+    InfoRequest(String timeStamp, Location location, SystemSettings systemSettings);
     String toJson();
 
 private:
