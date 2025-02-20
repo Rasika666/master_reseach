@@ -97,22 +97,7 @@ String createInfoRequest()
 
 	Network network("134.12.0.9", "fe80::f1c7:548d:b29e:8cbc", "myWifi", "0.78", connected_devices);
 
-	AdminUser adminUser("rasika", "test@123");
-	std::vector<String> open_ports;
-	open_ports.push_back("80");
-	Security security("Enabled", "AES", open_ports);
-	Policy policy(true, "2024-12-28 10:45:00", "ch1");
-	SystemSettings systemSetting(adminUser, security, policy);
-
-	ActiveCommand ac1("start", "success", "2024-08-10 10:1000");
-	ActiveCommand ac2("stop", "failed", "2024-08-10 10:1000");
-
-	std::vector<ActiveCommand> activeCommands;
-	activeCommands.push_back(ac1);
-	activeCommands.push_back(ac2);
-	Control control(activeCommands);
-
-	InfoRequest inforReq(dateTimeNow(), deviceLocation, device, network, systemSetting, control);
+	InfoRequest inforReq(dateTimeNow(), deviceLocation, network);
 
 	String jsonPayload = inforReq.toJson();
 	Serial.println("create info request:");

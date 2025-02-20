@@ -24,31 +24,6 @@ public class WeatherRequest {
         private String longitude;
     }
 
-    private Device device;
-
-    @Data
-    @NoArgsConstructor
-    public static class Device {
-        private String device_id;
-        private String type;
-        private String manufacturer;
-        private String model;
-        private String firmware_version;
-        private String hardware_version;
-        private String last_reboot;
-        private String uptime;
-        private Location location;
-
-        @Data
-        @NoArgsConstructor
-        public static class Location {
-            private String address;
-            @Nonnull
-            private String latitude;
-            @Nonnull
-            private String longitude;
-        }
-    }
     private Network network;
     @Data
     @NoArgsConstructor
@@ -82,45 +57,5 @@ public class WeatherRequest {
             private String event;
         }
     }
-    private SystemSettings systemSettings;
-    @Data
-    @NoArgsConstructor
-    public static class SystemSettings {
-        private AdminUser admin_user;
-        @Data
-        @NoArgsConstructor
-        public static class AdminUser {
-            private String username;
-            private String password;
-        }
-        private Security security;
-        @Data
-        @NoArgsConstructor
-        public static class Security {
-            private String firewall_status;
-            private String encryption;
-            private List<String> open_ports;
-        }
-        private Policy policy;
-        @Data
-        @NoArgsConstructor
-        public static class Policy {
-            private boolean auto_updates;
-            private String last_update_check;
-            private String update_channel;
-        }
-    }
-    private Control control;
-    @Data
-    @NoArgsConstructor
-    public static class Control {
-        private List<ActiveCommand> active_commands;
-        @Data
-        @NoArgsConstructor
-        public static class ActiveCommand {
-            private String command;
-            private String status;
-            private String timestamp;
-        }
-    }
+
 }
