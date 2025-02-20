@@ -4,8 +4,8 @@
 #include "InfoRequest.h"
 
 
-InfoRequest::InfoRequest(String timeStamp, Location location, Device device, Network network, SystemSettings systemSettings, Control control)
-    :timeStamp(timeStamp), location(location), device(device), network(network), systemSettings(systemSettings), control(control) {};
+InfoRequest::InfoRequest(String timeStamp, Location location, Device device)
+    :timeStamp(timeStamp), location(location), device(device) {};
 
 void InfoRequest::serializeOpenPorts(const std::vector<String>& vec, JsonArray jsonArray) {
     for (const String& item : vec) {
@@ -60,36 +60,6 @@ String InfoRequest::toJson() {
     deviceLoc["address"] = device.location.address;
     deviceLoc["latitude"] = device.location.latitude;
     deviceLoc["longitude"] = device.location.longitude;
-
-    JsonObject networkObj = doc["network"].to<JsonObject>();
-    networkObj["ip_address"] = network.ip_address;
-    networkObj["mac_address"] = network.mac_address;
-    networkObj["ssid"] = network.ssid;
-    networkObj["ip_address"] = network.ip_address;
-    networkObj["signal_strength"] = network.signal_strength;
-    JsonArray networkConnectedDevice = networkObj["connected_devices"].to<JsonArray>();
-    serializeConnectedDevices(network.connected_devices, networkConnectedDevice);
-
-    JsonObject systemSettingsObj = doc["systemSettings"].to<JsonObject>();
-    JsonObject systemSettingsAdminUser = systemSettingsObj["admin_user"].to<JsonObject>();
-    systemSettingsAdminUser["username"] = systemSettings.admin_user.username;
-    systemSettingsAdminUser["password"] = systemSettings.admin_user.password;
-
-    JsonObject systemSettingsSecurity = systemSettingsObj["security"].to<JsonObject>();
-    systemSettingsSecurity["firewall_status"] = systemSettings.security.firewall_status;
-    systemSettingsSecurity["encryption"] = systemSettings.security.encryption;
-    JsonArray systemSettingsSecurityOpenPort = systemSettingsSecurity["open_ports"].to<JsonArray>();
-    serializeOpenPorts(*systemSettings.security.open_ports ,systemSettingsSecurityOpenPort);
-
-    JsonObject systemSettingsPolicy = systemSettingsObj["policy"].to<JsonObject>();
-    systemSettingsPolicy["auto_updates"] = systemSettings.policy.auto_updates;
-    systemSettingsPolicy["last_update_check"] = systemSettings.policy.last_update_check;
-    systemSettingsPolicy["update_channel"] = systemSettings.policy.update_channel;
-
-    JsonObject controlObj = doc["control"].to<JsonObject>();
-    JsonArray controlActiveCommand = controlObj["active_commands"].to<JsonArray>();
-    serializeActiveCommand(control.active_commands, controlActiveCommand);
-
 
     String output;
     serializeJson(doc, output);
