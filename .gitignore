@@ -36,3 +36,6 @@ build/
 .venv
 .env
 ./analysis/.env/*
+**/venv/*
+
+/analysis/h1/venv/
